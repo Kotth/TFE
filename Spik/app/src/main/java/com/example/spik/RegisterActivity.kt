@@ -39,9 +39,10 @@ class RegisterActivity: AppCompatActivity() {
 
             val email = emailAddressRegister.text.toString()
             val password = passwordRegister.text.toString()
+        val pseudo = pseudoRegister.text.toString()
 
-            if(email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show()
+            if(email.isEmpty() || password.isEmpty() || pseudo.isEmpty()) {
+                Toast.makeText(this, "Pseudo, Email ou mot de passe vide", Toast.LENGTH_SHORT).show()
                 return
             }
 
@@ -66,6 +67,10 @@ class RegisterActivity: AppCompatActivity() {
         val user = User(uid, pseudoRegister.text.toString(), langSpinner.selectedItem.toString())
 
         database.setValue(user)
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
 
