@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Spik</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="inscription">Inscription</string>
+    <string name="photo_de_profil">Photo de profil</string>
+    <string name="connexion">Connexion</string>
+    <string name="adresse_mail">Adresse mail</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="pas_encore_de_compte_inscrivez_vous">Pas encore de compte? Inscrivez-vous!</string>
+    <string name="background">background</string>
+</resources>
