@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "306878821842",
+    "project_id": "spik-app",
+    "storage_bucket": "spik-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306878821842:android:8072c8856272363f1a040b",
+        "android_client_info": {
+          "package_name": "com.example.spik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306878821842-raqcbookc2j1vhk1mo7b7qpru91j7s8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBKqNrFVa3hCuHYH7qMjpuVRHoSeUstvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306878821842-raqcbookc2j1vhk1mo7b7qpru91j7s8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

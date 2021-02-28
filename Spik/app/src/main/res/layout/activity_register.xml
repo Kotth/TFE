@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".RegisterActivity">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="412dp"
+        android:layout_height="734dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/gradient" />
+
+    <EditText
+        android:id="@+id/pseudoRegister"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="5dp"
+        android:autoText="false"
+        android:background="@drawable/text_border"
+        android:capitalize="none"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:hint="@string/pseudo"
+        android:inputType="textEmailAddress"
+        android:textColor="#707070"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/langSpinner"
+        app:layout_constraintEnd_toEndOf="@+id/langSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/langSpinner" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="280dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="75dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/inscription"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/lightBlue"
+        app:cornerRadius="30dp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/emailAddressRegister"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="5dp"
+        android:autoText="false"
+        android:background="@drawable/text_border"
+        android:capitalize="none"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:hint="@string/adresse_mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#707070"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordRegister"
+        app:layout_constraintEnd_toEndOf="@+id/passwordRegister"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordRegister" />
+
+    <EditText
+        android:id="@+id/passwordRegister"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/text_border"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:hint="@string/mot_de_passe"
+        android:inputType="textPassword"
+        android:textColor="#707070"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="@+id/registerButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/registerButton" />
+
+    <Spinner
+        android:id="@+id/langSpinner"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/text_border"
+        android:gravity="center"
+        android:popupBackground="@drawable/text_border"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddressRegister"
+        app:layout_constraintEnd_toEndOf="@+id/emailAddressRegister"
+        app:layout_constraintStart_toStartOf="@+id/emailAddressRegister" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/pseudoRegister"
+        app:layout_constraintEnd_toEndOf="@+id/pseudoRegister"
+        app:layout_constraintStart_toStartOf="@+id/pseudoRegister"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/spik" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
