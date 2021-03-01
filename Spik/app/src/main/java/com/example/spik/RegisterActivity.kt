@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.spinner_item.*
 import java.util.*
 
 
@@ -25,9 +26,9 @@ class RegisterActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val adapter: ArrayAdapter<*> =
-            ArrayAdapter.createFromResource(this, R.array.languages_available, R.layout.spinner_item)
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(this, R.array.languages_available, R.layout.spinner_item)
         langSpinner.adapter = adapter
+
 
         registerButton.setOnClickListener {
             register()
@@ -40,9 +41,10 @@ class RegisterActivity: AppCompatActivity() {
             val email = emailAddressRegister.text.toString()
             val password = passwordRegister.text.toString()
         val pseudo = pseudoRegister.text.toString()
+        val index = langSpinner.selectedItemPosition
 
-            if(email.isEmpty() || password.isEmpty() || pseudo.isEmpty()) {
-                Toast.makeText(this, "Pseudo, Email ou mot de passe vide", Toast.LENGTH_SHORT).show()
+            if(email.isEmpty() || password.isEmpty() || pseudo.isEmpty() || index == 0) {
+                Toast.makeText(this, "Pseudo, langue, Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show()
                 return
             }
 

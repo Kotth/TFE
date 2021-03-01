@@ -8,4 +8,5 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="pas_encore_de_compte_inscrivez_vous">Pas encore de compte? Inscrivez-vous!</string>
     <string name="background">background</string>
+    <string name="lang">Langue</string>
 </resources>
