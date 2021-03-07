@@ -7,7 +7,7 @@
             android:title="Modifier le profil"/>
         <item
             android:id="@+id/item2"
-            android:title="test" />
+            android:title="Supprimer ce compte" />
         <item
             android:id="@+id/item3"
             android:title="test" />
