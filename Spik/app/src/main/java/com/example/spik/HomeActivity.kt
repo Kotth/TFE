@@ -10,6 +10,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //Bouton de menu pour l'ouverture du drawer
         menuButton.setOnClickListener {
             menuDrawer.openDrawer(slider)
         }
