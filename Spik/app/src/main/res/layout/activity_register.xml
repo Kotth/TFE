@@ -32,7 +32,8 @@
         android:gravity="center"
         android:hint="@string/pseudo"
         android:inputType="textEmailAddress"
-        android:textColor="#707070"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@android:color/darker_gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/langSpinner"
         app:layout_constraintEnd_toEndOf="@+id/langSpinner"
@@ -75,7 +76,7 @@
         android:gravity="center"
         android:hint="@string/adresse_mail"
         android:inputType="textEmailAddress"
-        android:textColor="#707070"
+        android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordRegister"
         app:layout_constraintEnd_toEndOf="@+id/passwordRegister"
@@ -93,7 +94,7 @@
         android:gravity="center"
         android:hint="@string/mot_de_passe"
         android:inputType="textPassword"
-        android:textColor="#707070"
+        android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="@+id/registerButton"
@@ -108,11 +109,12 @@
         android:background="@drawable/text_border"
         android:gravity="center"
         android:popupBackground="@drawable/text_border"
+        android:prompt="@string/lang"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/emailAddressRegister"
         app:layout_constraintEnd_toEndOf="@+id/emailAddressRegister"
-        app:layout_constraintStart_toStartOf="@+id/emailAddressRegister" />
+        app:layout_constraintStart_toStartOf="@+id/emailAddressRegister"/>
 
     <ImageView
         android:id="@+id/imageView"
