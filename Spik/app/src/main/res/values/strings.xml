@@ -13,4 +13,5 @@
     <string name="deconnexion">Déconnexion</string>
     <string name="supprimer_le_compte">Supprimer le compte</string>
     <string name="modifier_le_profil">Modifier le profil</string>
+    <string name="logo">LOGO</string>
 </resources>

@@ -1,12 +1,16 @@
 package com.example.spik
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -23,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
         slider.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.toString()) {
-                 "Modifier le profil" -> {
+                "Modifier le profil" -> {
                     Log.d("HomeActivity", "1")
                     true
                 }
@@ -46,5 +50,18 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
+
+    //Fonction pour changer l'action lorqu'on appui sur la touche Back du menu de navigation
+    override fun onBackPressed() {
+        val drawer = menuDrawer
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            // Si le drawer est ouvert -> le ferm
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            // Sinon effectue l'action de base du bouton
+            super.onBackPressed()
+        }
+    }
+
 
 }

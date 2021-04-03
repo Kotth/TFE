@@ -14,10 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:fitsSystemWindows="true">
-
-
-    </LinearLayout>
+        android:fitsSystemWindows="true"
+        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -27,5 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:srcCompat="@drawable/spik2" />
+        app:srcCompat="@drawable/spik2"
+        android:contentDescription="@string/logo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

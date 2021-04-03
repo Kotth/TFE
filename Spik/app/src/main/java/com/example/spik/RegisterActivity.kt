@@ -77,7 +77,7 @@ class RegisterActivity: AppCompatActivity() {
         val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/").getReference("/users/$uid")
 
         //Création de l'objet user
-        val user = User(uid, pseudoRegister.text.toString(), langSpinner.selectedItem.toString())
+        val user = User(uid, pseudoRegister.text.toString(), langSpinner.selectedItem.toString(), false)
 
         //Envoi vers la db
         database.setValue(user)
@@ -90,4 +90,4 @@ class RegisterActivity: AppCompatActivity() {
 }
 
 //Class d'objet User pour les utilisateurs
-class User(val uid: String, val username: String, val lang: String)
+class User(val uid: String, val username: String, val lang: String, val online: Boolean)
