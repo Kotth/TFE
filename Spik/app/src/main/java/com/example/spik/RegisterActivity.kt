@@ -81,11 +81,20 @@ class RegisterActivity: AppCompatActivity() {
 
         //Envoi vers la db
         database.setValue(user)
+                //Si la requete réussit
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Compte créé avec succès", Toast.LENGTH_SHORT).show()
+                    //Renvoie vers la page de connexion
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+                //Si la requête échoue
+                .addOnFailureListener {
+                    Toast.makeText(this, "Erreur lors de la création du compte: $it.message", Toast.LENGTH_SHORT).show()
+                }
 
-        //Renvoie vers la page de connexion
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+
     }
 }
 

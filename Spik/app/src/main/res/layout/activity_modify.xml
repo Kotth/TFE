@@ -1,56 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".RegisterActivity">
+    android:background="@drawable/gradient">
 
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="412dp"
-        android:layout_height="734dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/gradient" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spik" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/pseudoRegister"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="5dp"
-        android:autoText="false"
-        android:background="@drawable/text_border"
-        android:capitalize="none"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:hint="@string/pseudo"
-        android:inputType="textEmailAddress"
-        android:textColor="@android:color/darker_gray"
-        android:textColorHint="@android:color/darker_gray"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/langSpinner"
-        app:layout_constraintEnd_toEndOf="@+id/langSpinner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/langSpinner"
-        app:layout_constraintTop_toTopOf="@+id/background"
-        app:layout_constraintVertical_bias="0.992" />
+        <ImageView
+            android:id="@+id/returnButton"
+            android:layout_width="36dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            app:srcCompat="@drawable/outline_arrow_back_white_24" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <Spinner
         android:id="@+id/langSpinner"
@@ -117,7 +93,7 @@
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="@string/inscription"
+        android:text="@string/sauvegarder"
         android:textSize="24sp"
         android:textStyle="bold"
         app:backgroundTint="@color/lightBlue"
