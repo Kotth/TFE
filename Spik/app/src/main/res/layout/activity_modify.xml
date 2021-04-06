@@ -39,12 +39,12 @@
         android:prompt="@string/lang"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/emailAddressRegister"
-        app:layout_constraintEnd_toEndOf="@+id/emailAddressRegister"
-        app:layout_constraintStart_toStartOf="@+id/emailAddressRegister" />
+        app:layout_constraintBottom_toTopOf="@+id/emailAddressModify"
+        app:layout_constraintEnd_toEndOf="@+id/emailAddressModify"
+        app:layout_constraintStart_toStartOf="@+id/emailAddressModify" />
 
     <EditText
-        android:id="@+id/emailAddressRegister"
+        android:id="@+id/emailAddressModify"
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginBottom="5dp"
@@ -58,13 +58,13 @@
         android:inputType="textEmailAddress"
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordRegister"
-        app:layout_constraintEnd_toEndOf="@+id/passwordRegister"
+        app:layout_constraintBottom_toTopOf="@+id/passwordModify"
+        app:layout_constraintEnd_toEndOf="@+id/passwordModify"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/passwordRegister" />
+        app:layout_constraintStart_toStartOf="@+id/passwordModify" />
 
     <EditText
-        android:id="@+id/passwordRegister"
+        android:id="@+id/passwordModify"
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_marginBottom="50dp"
@@ -76,13 +76,13 @@
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
-        app:layout_constraintEnd_toEndOf="@+id/registerButton"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="@+id/saveButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/registerButton" />
+        app:layout_constraintStart_toStartOf="@+id/saveButton" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/saveButton"
         android:layout_width="280dp"
         android:layout_height="70dp"
         android:layout_marginBottom="75dp"
