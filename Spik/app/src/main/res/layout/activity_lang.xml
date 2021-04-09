@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/returnButton"
+            android:id="@+id/returnModify"
             android:layout_width="36dp"
             android:layout_height="54dp"
             android:layout_marginStart="12dp"
@@ -30,55 +30,36 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/langButton"
+    <Spinner
+        android:id="@+id/changeLangSpinner"
         android:layout_width="280dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="249dp"
-        android:fontFamily="@font/roboto"
+        android:layout_height="60dp"
+        android:layout_marginTop="276dp"
+        android:background="@drawable/text_border"
         android:gravity="center"
-        android:padding="0dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="@string/modifier_la_langue"
-        android:textColor="@android:color/background_light"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/lightBlue"
-        app:cornerRadius="30dp"
-        app:iconPadding="0dp"
+        android:popupBackground="@drawable/text_border"
+        android:prompt="@string/lang"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
-        android:id="@+id/passwordButton"
-        android:layout_width="280dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="249dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:padding="0dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="@string/modifier_le_mot_de_passe"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/lightBlue"
+        android:id="@+id/langSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:width="280dp"
+        android:height="70dp"
+        android:backgroundTint="@color/lightBlue"
+        android:text="@string/sauvegarder"
+        android:textSize="24sp"
         app:cornerRadius="30dp"
-        app:iconPadding="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/langButton"
+        app:layout_constraintEnd_toEndOf="@+id/changeLangSpinner"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/langButton"
-        app:layout_constraintTop_toBottomOf="@+id/langButton"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintStart_toStartOf="@+id/changeLangSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/changeLangSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

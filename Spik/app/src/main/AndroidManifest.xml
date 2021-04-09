@@ -9,17 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Spik">
-        <activity android:name=".HomeActivity">
+
+        <activity android:name=".homemessages.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".registerlogin.LoginActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".registerlogin.RegisterActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ModifyActivity"
+        <activity android:name=".modify.ModifyActivity"/>
+        <activity android:name=".modify.PasswordActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".modify.LangActivity"/>
+        <activity android:name=".modify.DeleteActivity"/>
+        <activity android:name=".homemessages.MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
 
         <meta-data

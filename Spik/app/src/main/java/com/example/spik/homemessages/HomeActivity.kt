@@ -1,16 +1,23 @@
-package com.example.spik
+package com.example.spik.homemessages
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
+import com.example.spik.R
+import com.example.spik.modify.DeleteActivity
+import com.example.spik.modify.ModifyActivity
+import com.example.spik.registerlogin.LoginActivity
+import com.example.spik.registerlogin.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlin.random.Random
 
 
 class HomeActivity : AppCompatActivity() {
@@ -28,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
         //Bouton de menu pour l'ouverture du drawer
         menuButton.setOnClickListener {
             menuDrawer.openDrawer(slider)
+        }
+
+        plusButton.setOnClickListener {
+            newMessage()
         }
 
         slider.setNavigationItemSelectedListener { menuItem ->
@@ -50,7 +61,10 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 "Supprimer le compte" -> {
-                    Log.d("HomeActivity", "3")
+                    val intent = Intent(this, DeleteActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    menuDrawer.closeDrawer(GravityCompat.START)
+                    startActivity(intent)
                     true
                 }
                 else -> {
@@ -63,13 +77,11 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        database.getReference("/users/$uid")
         database.getReference("/users/$uid").child("online").setValue(false)
     }
 
     override fun onRestart() {
         super.onRestart()
-        database.getReference("/users/$uid")
         database.getReference("/users/$uid").child("online").setValue(true)
     }
 
@@ -80,7 +92,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         } else {
             //Si connecté le passe online
-            database.getReference("/users/$uid")
             database.getReference("/users/$uid").child("online").setValue(true)
         }
     }
@@ -97,5 +108,56 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun newMessage() {
+        val ref = database.getReference("/users")
+        var thisUser = User(null, null, null, false)
+        var userList: MutableList<User> = mutableListOf()
+
+        ref.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(users: DataSnapshot) {
+                        users.children.forEach{
+                            if (it.key == uid)  {
+                                thisUser = it.getValue(User::class.java)!!
+                            }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@HomeActivity, "Erreur veuillez réessayer", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        )
+
+        ref.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(users: DataSnapshot) {
+                        users.children.forEach {
+                            if (it.key != uid) {
+                                val temp: User? = it.getValue(User::class.java)
+                                if(temp!!.online && temp.lang == thisUser.lang) {
+                                    userList.add(temp)
+                                }
+                            }
+                        }
+                        if(userList.isEmpty()) {
+                            Toast.makeText(this@HomeActivity, "Aucune personne trouvée", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@HomeActivity, MessageActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+
+                        } else {
+                            Log.d("tag", userList.random().username!!)
+                            val intent = Intent(this@HomeActivity, MessageActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@HomeActivity, "Erreur veuillez réessayer", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        )
+    }
 
 }
+
