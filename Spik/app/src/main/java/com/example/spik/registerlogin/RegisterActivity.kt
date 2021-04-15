@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.spik.R
+import com.example.spik.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
@@ -109,9 +110,4 @@ class RegisterActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-}
-
-//Class d'objet User pour les utilisateurs
-class User(val uid: String?, val username: String?, val lang: Int?, val online: Boolean) {
-    constructor() : this("","", 0, false)
 }
