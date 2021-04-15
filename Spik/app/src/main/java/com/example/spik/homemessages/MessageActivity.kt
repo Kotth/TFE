@@ -2,16 +2,15 @@ package com.example.spik.homemessages
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.health.UidHealthStats
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spik.R
 import com.example.spik.models.Message
 import com.example.spik.models.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_message.*
 import com.xwray.groupie.*
 import kotlinx.android.synthetic.main.left_row.view.*
@@ -22,16 +21,19 @@ class MessageActivity: AppCompatActivity() {
     private val user = FirebaseAuth.getInstance()
     private val uid = user.uid
     private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
-    private val toUser = intent.getParcelableExtra<User>("user")
-    private val toUid = toUser!!.uid
-    private val ref = database.getReference("/messages/$uid/$toUid")
-    private val messagesId: String? = ref.key
     private val adapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var toUser: User
+    private lateinit var toUid: String
+    private lateinit var reference: DatabaseReference
+    private lateinit var messagesId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
 
+        toUser = intent.getParcelableExtra("USER")!!
+        toUid = toUser.uid.toString()
+        reference = database.getReference("/messages/$uid/$toUid")
         recyclerviewMessage.adapter = adapter
 
         getMessage()
@@ -39,21 +41,21 @@ class MessageActivity: AppCompatActivity() {
         sendButton.setOnClickListener {
             sendMessage()
         }
-
         backHomeButton.setOnClickListener{
             backHome()
         }
     }
 
     private fun getMessage() {
-        ref.addChildEventListener(object: ChildEventListener {
+        reference.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val message = snapshot.getValue(Message::class.java)
-
-                if (message!!.fromId == user.uid) {
-                    adapter.add(MessageToItem(message.text))
-                } else {
-                    adapter.add(MessageFromItem(message.text))
+                if (message != null) {
+                    if (message.fromId == uid) {
+                        adapter.add(MessageToItem(message.text))
+                    } else {
+                        adapter.add(MessageFromItem(message.text))
+                    }
                 }
             }
 
@@ -72,9 +74,12 @@ class MessageActivity: AppCompatActivity() {
     }
 
     private fun sendMessage() {
+        val ref = database.getReference("/messages/$uid/$toUid").push()
+        val refTwo = database.getReference("/messages/$toUid/$uid").push()
+        messagesId = ref.key.toString()
         val text = editTextMessage.text.toString()
-        val message = Message(messagesId!!, text, uid!!, toUser!!.uid!!)
-        val refTwo = database.getReference("/messages/$toUid/$uid")
+        val message = Message(messagesId, text, uid!!, toUser.uid!!)
+
         ref.setValue(message)
                 .addOnSuccessListener {
                     editTextMessage.text.clear()
@@ -101,7 +106,7 @@ class MessageActivity: AppCompatActivity() {
 
 class MessageFromItem(val text: String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.textViewFrom
+        viewHolder.itemView.textViewFrom.text = text
     }
 
     override fun getLayout(): Int {
@@ -111,7 +116,7 @@ class MessageFromItem(val text: String): Item<GroupieViewHolder>() {
 
 class MessageToItem(val text: String): Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.textViewTo
+        viewHolder.itemView.textViewTo.text = text
     }
 
     override fun getLayout(): Int {

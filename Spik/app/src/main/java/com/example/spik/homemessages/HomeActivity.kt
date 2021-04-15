@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlin.random.Random
 
 
 class HomeActivity : AppCompatActivity() {
@@ -143,8 +142,7 @@ class HomeActivity : AppCompatActivity() {
                             Toast.makeText(this@HomeActivity, "Aucune personne trouvée", Toast.LENGTH_SHORT).show()
                         } else {
                             val intent = Intent(this@HomeActivity, MessageActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            intent.putExtra("user", userList.random())
+                            intent.putExtra("USER", userList.random())
                             startActivity(intent)
                         }
                     }

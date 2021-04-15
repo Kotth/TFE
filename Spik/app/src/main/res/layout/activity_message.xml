@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar"
@@ -38,6 +39,7 @@
         android:background="@color/white"
         android:ems="10"
         android:hint="@string/entrez_votre_message"
+        android:textColorHint="?attr/hintTextColor"
         android:inputType="textPersonName"
         android:padding="5dp"
         android:textSize="24sp"

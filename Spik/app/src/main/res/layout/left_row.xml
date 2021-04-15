@@ -15,7 +15,7 @@
         android:background="@drawable/rounded_border"
         android:maxWidth="240dp"
         android:padding="16dp"
-        android:text=""
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
