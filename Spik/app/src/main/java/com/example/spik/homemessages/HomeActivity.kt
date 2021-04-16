@@ -2,7 +2,6 @@ package com.example.spik.homemessages
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -30,6 +29,11 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         checkLogin()
+
+
+        if(uid != null) {
+            checkConnexion()
+        }
 
         //Bouton de menu pour l'ouverture du drawer
         menuButton.setOnClickListener {
@@ -74,6 +78,32 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private fun checkConnexion() {
+        database.getReference("/users/$uid").child("connectedTo").addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val toUid = snapshot.getValue(String::class.java)
+                if (toUid != "") {
+                    database.getReference("/users").child(toUid!!).addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val toUser = snapshot.getValue(User::class.java)
+                            database.getReference("/users/$toUid").child("connectedTo").setValue(uid)
+                            database.getReference("/users/$uid").child("online").setValue(false)
+                            val intent = Intent(this@HomeActivity, MessageActivity::class.java)
+                            intent.putExtra("USER", toUser)
+                            startActivity(intent)
+                            Toast.makeText(this@HomeActivity, "Discussion lancée", Toast.LENGTH_SHORT).show()
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+                    })
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     override fun onStop() {
         super.onStop()
         database.getReference("/users/$uid").child("online").setValue(false)
@@ -109,47 +139,64 @@ class HomeActivity : AppCompatActivity() {
 
     private fun newMessage() {
         val ref = database.getReference("/users")
-        var thisUser = User(null, null, null, false)
+        var thisUser = User(null, null, null, false, "")
         var userList: MutableList<User> = mutableListOf()
 
         ref.addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(users: DataSnapshot) {
-                        users.children.forEach{
-                            if (it.key == uid)  {
-                                thisUser = it.getValue(User::class.java)!!
-                            }
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key == uid) {
+                            thisUser = it.getValue(User::class.java)!!
                         }
                     }
-                    override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(this@HomeActivity, "Erreur veuillez réessayer", Toast.LENGTH_SHORT).show()
-                    }
                 }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@HomeActivity,
+                        "Erreur veuillez réessayer",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         )
 
         ref.addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(users: DataSnapshot) {
-                        users.children.forEach {
-                            if (it.key != uid) {
-                                val temp: User? = it.getValue(User::class.java)
-                                if(temp!!.online && temp.lang == thisUser.lang) {
-                                    userList.add(temp)
-                                }
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key != uid) {
+                            val temp: User? = it.getValue(User::class.java)
+                            if (temp!!.online && temp.lang == thisUser.lang) {
+                                userList.add(temp)
                             }
                         }
-                        if(userList.isEmpty()) {
-                            Toast.makeText(this@HomeActivity, "Aucune utilisateur disponible", Toast.LENGTH_SHORT).show()
-                        } else {
-                            val intent = Intent(this@HomeActivity, MessageActivity::class.java)
-                            intent.putExtra("USER", userList.random())
-                            startActivity(intent)
-                        }
                     }
-                    override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(this@HomeActivity, "Erreur veuillez réessayer", Toast.LENGTH_SHORT).show()
+                    if (userList.isEmpty()) {
+                        Toast.makeText(
+                            this@HomeActivity,
+                            "Aucune utilisateur disponible",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val toUser = userList.random()
+                        val toUid = toUser.uid
+                        database.getReference("/users/$toUid").child("connectedTo").setValue(uid)
+                        val intent = Intent(this@HomeActivity, MessageActivity::class.java)
+                        intent.putExtra("USER", toUser)
+                        startActivity(intent)
                     }
                 }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@HomeActivity,
+                        "Erreur veuillez réessayer",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         )
     }
 

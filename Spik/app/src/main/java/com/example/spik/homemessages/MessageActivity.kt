@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.health.UidHealthStats
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spik.R
@@ -26,6 +27,7 @@ class MessageActivity: AppCompatActivity() {
     private lateinit var toUid: String
     private lateinit var reference: DatabaseReference
     private lateinit var messagesId: String
+    private var check = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +40,29 @@ class MessageActivity: AppCompatActivity() {
 
         getMessage()
 
+        checkConnexion()
+
         sendButton.setOnClickListener {
             sendMessage()
         }
         backHomeButton.setOnClickListener{
             backHome()
         }
+    }
+
+    private fun checkConnexion() {
+        database.getReference("/users/$toUid").child("connectedTo").addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val toUid = snapshot.getValue(String::class.java)
+                if (toUid == "") {
+                    check = false
+                    backHome()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     private fun getMessage() {
@@ -93,6 +112,14 @@ class MessageActivity: AppCompatActivity() {
     }
 
     private fun backHome() {
+        if(check) {
+            database.getReference("/messages/$uid/$toUid").setValue(null)
+            database.getReference("/messages/$toUid/$uid").setValue(null)
+            database.getReference("/users/$uid").child("connectedTo").setValue("")
+            database.getReference("/users/$toUid").child("connectedTo").setValue("")
+            database.getReference("/users/$uid").child("online").setValue(true)
+        }
+
         //Renvoie vers la page d'accueil
         val intent = Intent(this, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

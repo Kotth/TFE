@@ -84,7 +84,7 @@ class RegisterActivity: AppCompatActivity() {
         database.getReference("/users/$uid")
 
         //Création de l'objet user
-        val user = User(uid!!, pseudoRegister.text.toString(), langSpinner.selectedItemPosition, false)
+        val user = User(uid!!, pseudoRegister.text.toString(), langSpinner.selectedItemPosition, false, "")
 
         //Envoi vers la db
         database.getReference("/users/$uid").setValue(user)
