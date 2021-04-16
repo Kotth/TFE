@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".registerlogin.LoginActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".registerlogin.LoginActivity">
 
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gradient"
-        android:contentDescription="@string/background" />
+        app:srcCompat="@drawable/gradient" />
 
     <ImageView
         android:id="@+id/logo"
@@ -97,10 +96,10 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:gravity="center"
-        android:textColorHint="?attr/hintTextColor"
         android:hint="@string/mot_de_passe"
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
+        android:textColorHint="?attr/hintTextColor"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/connexionButton"
         app:layout_constraintEnd_toEndOf="@+id/connexionButton"

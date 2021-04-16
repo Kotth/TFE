@@ -139,7 +139,7 @@ class HomeActivity : AppCompatActivity() {
                             }
                         }
                         if(userList.isEmpty()) {
-                            Toast.makeText(this@HomeActivity, "Aucune personne trouvée", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@HomeActivity, "Aucune utilisateur disponible", Toast.LENGTH_SHORT).show()
                         } else {
                             val intent = Intent(this@HomeActivity, MessageActivity::class.java)
                             intent.putExtra("USER", userList.random())
