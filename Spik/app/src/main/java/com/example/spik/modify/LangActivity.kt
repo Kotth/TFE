@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_lang.*
 
 class LangActivity: AppCompatActivity() {
 
+    // Récupération de l'user et de la database
     private val user = FirebaseAuth.getInstance()
     private val uid = user.uid
     private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -24,21 +25,27 @@ class LangActivity: AppCompatActivity() {
         val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(this, R.array.languages_available, R.layout.spinner_item)
         changeLangSpinner.adapter = adapter
 
+        // Renvoi vers la page de modif si clique sur le bouton de retour
         returnModify.setOnClickListener {
             returnBack()
         }
 
+        //Sauvegarde de la nouvelle langue au clique sur le bouton de sauvegarde
         langSaveButton.setOnClickListener {
             changeLang()
         }
     }
 
+    // Fonction de changement de la langue
     private fun changeLang() {
+        // Récupération de la langue
         val index = changeLangSpinner.selectedItemPosition
 
         if(index == 0) {
+            // Si index = 0 erreur car pas une langue
             Toast.makeText(this, "Veuillez sélectionner une langue correcte", Toast.LENGTH_SHORT).show()
         } else{
+            // Changement de langue dans la database
             database.getReference("/users/$uid").child("lang").setValue(index)
             //Renvoie vers la page de modif
             val intent = Intent(this, ModifyActivity::class.java)

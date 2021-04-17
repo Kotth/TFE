@@ -10,30 +10,37 @@ import kotlinx.android.synthetic.main.activity_password.*
 
 class PasswordActivity: AppCompatActivity() {
 
+    //récupération de l'user
     private val user = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password)
 
+        // Renvoie vers la page de modif si clique sur le botuon de retour
         returnBack.setOnClickListener {
             backModify()
         }
 
+        // Bouton de sauvegarde du nouveau mot de passe
         savePasswordButton.setOnClickListener {
             saveNewPassword()
         }
     }
 
+    // Fonction de sauvegarde du nouveau mot de passe
     private fun saveNewPassword() {
         val password = passwordEdit.text.toString()
         val confirmPassword = passwordEditConfirm.text.toString()
 
         if (password.isEmpty() || confirmPassword.isEmpty()) {
+            // Si un champ est vide
             Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_SHORT).show()
         } else if (password != confirmPassword) {
+            // si mots de passe différents
             Toast.makeText(this, "Les deux mots de passe doivent correspondre", Toast.LENGTH_SHORT).show()
         } else {
+            // Changement de mot de passe
             user.currentUser!!.updatePassword(password)
                     .addOnCompleteListener {
                         val intent = Intent(this, ModifyActivity::class.java)

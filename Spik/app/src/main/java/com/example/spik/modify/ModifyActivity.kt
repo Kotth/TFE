@@ -13,14 +13,17 @@ class ModifyActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modify)
 
+        // Renvoi vers la page d'acceuil si clique sur le bouton de retour
         returnButton.setOnClickListener {
             returnToHome()
         }
 
+        // envoi vers la page de modif du mot de passe
         passwordButton.setOnClickListener {
             modifyPassword()
         }
 
+        // envoi vers la page de modif de la langue
         langButton.setOnClickListener {
             modifyLang()
         }
@@ -39,6 +42,7 @@ class ModifyActivity: AppCompatActivity() {
     }
 
     private fun modifyLang() {
+        // Renvoie vers la page de modif de langue
         val intent = Intent(this, LangActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)

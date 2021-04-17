@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_delete.*
 
 class DeleteActivity : AppCompatActivity() {
 
+    // Récupération de l'user et de la database
     private val user = FirebaseAuth.getInstance()
     private val uid = user.uid
     private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -21,10 +22,12 @@ class DeleteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delete)
 
+        // Renvoi vers la page d'acceuil si clique sur le bouton retour
         returnBackHome.setOnClickListener {
             back()
         }
 
+        // Suppression du compte qi clique sur le bouton
         deleteButton.setOnClickListener {
             delete()
         }
@@ -43,15 +46,18 @@ class DeleteActivity : AppCompatActivity() {
     }
 
     private fun delete() {
+        // Suppression du compte
         user.currentUser!!.delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        // Si réussite
                         database.getReference("/users/$uid").setValue(null)
                         val intent = Intent(this, LoginActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         Toast.makeText(this, "Compte supprimé avec succès", Toast.LENGTH_SHORT).show()
                     } else {
+                        //Si erreur
                         Toast.makeText(this, "Erreur lors de la suppression du compte", Toast.LENGTH_SHORT).show()
                     }
                 }
