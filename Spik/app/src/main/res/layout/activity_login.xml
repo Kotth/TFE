@@ -4,25 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".LoginActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".registerlogin.LoginActivity">
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="412dp"
-        android:layout_height="734dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gradient"
-        android:contentDescription="@string/background" />
+        app:srcCompat="@drawable/gradient" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/spik" />
+
+    <EditText
+        android:id="@+id/emailAddressConnexion"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:autoText="false"
+        android:background="@drawable/text_border"
+        android:capitalize="none"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:hint="@string/adresse_mail"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="?attr/hintTextColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordConnexion"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConnexion"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordConnexion" />
 
     <Button
         android:id="@+id/connexionButton"
         android:layout_width="280dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="95dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
         android:padding="0dp"
@@ -41,57 +73,6 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/emailAddressConnexion"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="20dp"
-        android:autoText="false"
-        android:background="@drawable/text_border"
-        android:capitalize="none"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:hint="@string/adresse_mail"
-        android:inputType="textEmailAddress"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordConnexion"
-        app:layout_constraintEnd_toEndOf="@+id/passwordConnexion"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/passwordConnexion" />
-
-    <EditText
-        android:id="@+id/passwordConnexion"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/text_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:hint="@string/mot_de_passe"
-        android:inputType="textPassword"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/connexionButton"
-        app:layout_constraintEnd_toEndOf="@+id/connexionButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/connexionButton" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
-        app:layout_constraintBottom_toTopOf="@+id/emailAddressConnexion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/background"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/spik" />
-
     <TextView
         android:id="@+id/textRegister"
         android:layout_width="wrap_content"
@@ -104,6 +85,25 @@
         app:layout_constraintEnd_toEndOf="@+id/connexionButton"
         app:layout_constraintStart_toStartOf="@+id/connexionButton"
         app:layout_constraintTop_toBottomOf="@+id/connexionButton"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.223" />
+
+    <EditText
+        android:id="@+id/passwordConnexion"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="65dp"
+        android:background="@drawable/text_border"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:hint="@string/mot_de_passe"
+        android:inputType="textPassword"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="?attr/hintTextColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/connexionButton"
+        app:layout_constraintEnd_toEndOf="@+id/connexionButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/connexionButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

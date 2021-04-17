@@ -4,12 +4,15 @@
         android:id="@+id/group1">
         <item
             android:id="@+id/item1"
-            android:title="Modifier le profil"/>
+            android:icon="@drawable/outline_edit_black_48"
+            android:title="@string/modifier_le_profil" />
         <item
             android:id="@+id/item2"
-            android:title="Supprimer ce compte" />
+            android:icon="@drawable/baseline_logout_black_48"
+            android:title="@string/deconnexion" />
         <item
             android:id="@+id/item3"
-            android:title="test" />
+            android:icon="@drawable/outline_delete_black_48"
+            android:title="@string/supprimer_le_compte" />
     </group>
 </menu>

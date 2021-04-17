@@ -1,19 +1,15 @@
-package com.example.spik
+package com.example.spik.registerlogin
 
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.spik.R
+import com.example.spik.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.spinner_item.*
 import java.util.*
@@ -21,6 +17,7 @@ import java.util.*
 
 class RegisterActivity: AppCompatActivity() {
 
+    private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +45,17 @@ class RegisterActivity: AppCompatActivity() {
 
         //Vérification que tout les champs ont été remplis
         if(email.isEmpty() || password.isEmpty() || pseudo.isEmpty() || index == 0) {
-            Toast.makeText(this, "Pseudo, langue, Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show()
-            return
+            if(email.isEmpty()) {
+                Toast.makeText(this, "Email incorrect", Toast.LENGTH_SHORT).show()
+            } else if (password.isEmpty()) {
+                Toast.makeText(this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show()
+            } else if (pseudo.isEmpty()) {
+                Toast.makeText(this, "Pseudo incorrect", Toast.LENGTH_SHORT).show()
+            } else if (index == 0) {
+                Toast.makeText(this, "Langue incorrecte", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Erreur", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //Création d'un nouvel utilisateur
@@ -71,23 +77,37 @@ class RegisterActivity: AppCompatActivity() {
 
 
     private fun pushUserToFirebase() {
-        //Récupération de l'id de l'utilisateur pour le stockage dans la db
-        val uid = FirebaseAuth.getInstance().uid ?: ""
+
+        val uid = FirebaseAuth.getInstance().uid
+
         //Reference vers la db
-        val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/").getReference("/users/$uid")
+        database.getReference("/users/$uid")
 
         //Création de l'objet user
-        val user = User(uid, pseudoRegister.text.toString(), langSpinner.selectedItem.toString())
+        val user = User(uid!!, pseudoRegister.text.toString(), langSpinner.selectedItemPosition, false, "")
 
         //Envoi vers la db
-        database.setValue(user)
+        database.getReference("/users/$uid").setValue(user)
+                //Si la requete réussit
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Compte créé avec succès", Toast.LENGTH_SHORT).show()
+                    //Renvoie vers la page de connexion
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+                //Si la requête échoue
+                .addOnFailureListener {
+                    Toast.makeText(this, "Erreur lors de la création du compte: $it.message", Toast.LENGTH_SHORT).show()
+                }
+    }
 
-        //Renvoie vers la page de connexion
+    //Fonction pour changer l'action lorqu'on appuie sur la touche Back du menu de navigation
+    override fun onBackPressed() {
+        //Renvoie vers la page de login
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
-}
 
-//Class d'objet User pour les utilisateurs
-class User(val uid: String, val username: String, val lang: String)
+}
