@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spik">
+    package="com.messaging.spik">
 
     <application
         android:allowBackup="true"
@@ -10,31 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Spik">
 
-        <activity android:name=".homemessages.HomeActivity">
+        <activity android:name="com.messaging.spik.homemessages.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registerlogin.LoginActivity"
+        <activity android:name="com.messaging.spik.registerlogin.LoginActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".registerlogin.RegisterActivity"
+        <activity android:name="com.messaging.spik.registerlogin.RegisterActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".modify.ModifyActivity"/>
-        <activity android:name=".modify.PasswordActivity"
+        <activity android:name="com.messaging.spik.modify.ModifyActivity"/>
+        <activity android:name="com.messaging.spik.modify.PasswordActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".modify.LangActivity"/>
-        <activity android:name=".modify.DeleteActivity"/>
-        <activity android:name=".homemessages.MessageActivity"
+        <activity android:name="com.messaging.spik.modify.LangActivity"/>
+        <activity android:name="com.messaging.spik.modify.DeleteActivity"/>
+        <activity android:name="com.messaging.spik.homemessages.MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
-
-        <service
-            android:name=".java.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <meta-data
             android:name="preloaded_fonts"

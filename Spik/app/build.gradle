@@ -10,11 +10,19 @@ androidExtensions {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Documents\\keys.jks')
+            storePassword 'arnaud1998'
+            keyAlias 'spikupload'
+            keyPassword 'arnaud1998'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.spik"
+        applicationId "com.messaging.spik"
         minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
@@ -27,8 +35,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            applicationIdSuffix kotlin_version
-            versionNameSuffix kotlin_version
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
         }
     }
     compileOptions {
