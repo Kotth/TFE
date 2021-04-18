@@ -12,7 +12,7 @@ androidExtensions {
 android {
     signingConfigs {
         release {
-            storeFile file('D:\\Documents\\keys.jks')
+            storeFile file('D:\\Documents\\key.jks')
             storePassword 'arnaud1998'
             keyAlias 'spikupload'
             keyPassword 'arnaud1998'
@@ -25,8 +25,8 @@ android {
         applicationId "com.messaging.spik"
         minSdkVersion 29
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
