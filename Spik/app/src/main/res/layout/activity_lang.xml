@@ -33,8 +33,8 @@
 
     <Spinner
         android:id="@+id/changeLangSpinner"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginTop="276dp"
         android:background="@drawable/text_border"
         android:gravity="center"
@@ -49,9 +49,9 @@
 
     <Button
         android:id="@+id/langSaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_width="240dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="60dp"
         android:width="280dp"
         android:height="70dp"
         android:backgroundTint="@color/lightBlue"

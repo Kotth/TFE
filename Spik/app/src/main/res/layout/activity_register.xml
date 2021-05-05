@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,8 @@
 
     <EditText
         android:id="@+id/pseudoRegister"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:autoText="false"
         android:background="@drawable/text_border"
@@ -54,8 +54,8 @@
 
     <Spinner
         android:id="@+id/langSpinner"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/text_border"
         android:gravity="center"
@@ -69,8 +69,8 @@
 
     <EditText
         android:id="@+id/emailAddressRegister"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:autoText="false"
         android:background="@drawable/text_border"
@@ -90,8 +90,8 @@
 
     <EditText
         android:id="@+id/passwordRegister"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/text_border"
         android:ems="10"
@@ -109,8 +109,8 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_width="240dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="75dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"

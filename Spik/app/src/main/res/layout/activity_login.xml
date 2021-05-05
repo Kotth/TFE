@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
         android:layout_marginTop="175dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -31,8 +31,8 @@
 
     <EditText
         android:id="@+id/emailAddressConnexion"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="10dp"
         android:autoText="false"
         android:background="@drawable/text_border"
@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/connexionButton"
-        android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_width="240dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="95dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
@@ -80,7 +80,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/pas_encore_de_compte_inscrivez_vous"
         android:textColor="@color/lightBlue"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="@+id/connexionButton"
         app:layout_constraintStart_toStartOf="@+id/connexionButton"
@@ -89,8 +89,8 @@
 
     <EditText
         android:id="@+id/passwordConnexion"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="65dp"
         android:background="@drawable/text_border"
         android:ems="10"
