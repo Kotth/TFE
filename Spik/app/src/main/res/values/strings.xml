@@ -21,4 +21,5 @@
     <string name="etes_vous_vraiment_s_r_de_vouloir_supprimer_votre_compte">Etes-vous vraiment sûr de vouloir <br/> supprimer votre compte ?</string>
     <string name="entrez_votre_message">Entrez votre message</string>
     <string name="envoyer">envoyer</string>
+    <string name="lancer_une_conversation">Lancer une conversation</string>
 </resources>

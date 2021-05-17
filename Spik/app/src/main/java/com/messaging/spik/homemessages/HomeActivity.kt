@@ -24,6 +24,8 @@ class HomeActivity : AppCompatActivity() {
     private val user = FirebaseAuth.getInstance()
     private val uid = user.uid
     private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
+    private lateinit var thisUser: User
+    private val ref = database.getReference("/users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,9 @@ class HomeActivity : AppCompatActivity() {
         // Vérification si l'utilisateur est connecté
         checkLogin()
 
+        loadUser()
+
+        searchOnlineUsers()
 
         // Si connecté, verifié si personne ne lance de conversation avec
         if(uid != null) {
@@ -84,6 +89,25 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun loadUser() {
+        //Récupération des donnés de l'utilisateur local
+        ref.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key == uid) {
+                            thisUser = it.getValue(User::class.java)!!
+                            showPseudo()
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            }
+        )
     }
 
     //Listener pour vérifier si on reçoit des demandes de connexion
@@ -156,31 +180,7 @@ class HomeActivity : AppCompatActivity() {
 
     // Recherche d'une conversation
     private fun newMessage() {
-        //Création de la référence vers la database ainsi que la liste de users dispo
-        val ref = database.getReference("/users")
-        lateinit var thisUser: User
         var userList: MutableList<User> = mutableListOf()
-
-        //Récupération des donnés de l'utilisateur local
-        ref.addListenerForSingleValueEvent(
-            object : ValueEventListener {
-                override fun onDataChange(users: DataSnapshot) {
-                    users.children.forEach {
-                        if (it.key == uid) {
-                            thisUser = it.getValue(User::class.java)!!
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(
-                        this@HomeActivity,
-                        "Erreur veuillez réessayer",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        )
 
         // Recherche dans tout les utilisateurs des utilisateurs compatibles
         ref.addListenerForSingleValueEvent(
@@ -199,7 +199,7 @@ class HomeActivity : AppCompatActivity() {
                         // Si la liste est vide, impossible de créer une conversation
                         Toast.makeText(
                             this@HomeActivity,
-                            "Aucune utilisateur disponible",
+                            "Aucun utilisateur disponible",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
@@ -218,6 +218,63 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    //fonction de recherche d'utilisateurs online en fonction de la langue
+    private fun searchOnlineLangUsers() {
+        var userList: MutableList<User> = mutableListOf()
+
+        // Recherche dans tout les utilisateurs des utilisateurs compatibles
+        ref.addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key != uid) {
+                            val temp: User? = it.getValue(User::class.java)
+                            if (temp!!.online && temp.lang == thisUser.lang) {
+                                //Si utilisateur trouvé, on le met dans la liste
+                                userList.add(temp)
+                            }
+                        }
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            }
+        )
+
+    }
+
+    //Recherche d'utilisateurs en ligne
+    private fun searchOnlineUsers() {
+        var userList: MutableList<User> = mutableListOf()
+
+        // Recherche dans tout les utilisateurs des utilisateurs compatibles
+        ref.addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key != uid && it.getValue(User::class.java)!!.online) {
+                            val temp: User? = it.getValue(User::class.java)
+                            //Si utilisateur trouvé, on le met dans la liste
+                            if (temp != null) {
+                                userList.add(temp)
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            }
+        )
+        val str = userList.size.toString() + " utilisateurs en ligne."
+        number2.text = str
+    }
+
+    private fun showPseudo() {
+        pseudo.text = thisUser.username.toString()
     }
 
 }
