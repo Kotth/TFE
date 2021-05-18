@@ -41,6 +41,7 @@
         android:hint="@string/entrez_votre_message"
         android:inputType="textPersonName"
         android:padding="5dp"
+        android:textAlignment="center"
         android:textColorHint="?attr/hintTextColor"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,11 +50,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewMessage"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/gradient"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/editTextMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

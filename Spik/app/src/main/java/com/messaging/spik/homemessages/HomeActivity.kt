@@ -187,7 +187,7 @@ class HomeActivity : AppCompatActivity() {
             object : ValueEventListener {
                 override fun onDataChange(users: DataSnapshot) {
                     users.children.forEach {
-                        if (it.key != uid) {
+                        if (it.key != uid && it.key != "null") {
                             val temp: User? = it.getValue(User::class.java)
                             if (temp!!.online && temp.lang == thisUser.lang) {
                                 //Si utilisateur trouvé, on le met dans la liste
@@ -220,61 +220,42 @@ class HomeActivity : AppCompatActivity() {
         )
     }
 
-    //fonction de recherche d'utilisateurs online en fonction de la langue
-    private fun searchOnlineLangUsers() {
-        var userList: MutableList<User> = mutableListOf()
-
-        // Recherche dans tout les utilisateurs des utilisateurs compatibles
-        ref.addValueEventListener(
-            object : ValueEventListener {
-                override fun onDataChange(users: DataSnapshot) {
-                    users.children.forEach {
-                        if (it.key != uid) {
-                            val temp: User? = it.getValue(User::class.java)
-                            if (temp!!.online && temp.lang == thisUser.lang) {
-                                //Si utilisateur trouvé, on le met dans la liste
-                                userList.add(temp)
-                            }
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                }
-            }
-        )
-
-    }
-
     //Recherche d'utilisateurs en ligne
     private fun searchOnlineUsers() {
         var userList: MutableList<User> = mutableListOf()
+        var langList: MutableList<User> = mutableListOf()
 
         // Recherche dans tout les utilisateurs des utilisateurs compatibles
         ref.addValueEventListener(
             object : ValueEventListener {
                 override fun onDataChange(users: DataSnapshot) {
                     users.children.forEach {
-                        if (it.key != uid && it.getValue(User::class.java)!!.online) {
+                        if (it.key != uid && it.key != "null") {
                             val temp: User? = it.getValue(User::class.java)
                             //Si utilisateur trouvé, on le met dans la liste
-                            if (temp != null) {
+                            if (temp!!.online) {
                                 userList.add(temp)
+                                if (temp.lang == thisUser.lang) {
+                                    langList.add(temp)
+                                }
                             }
+                            val str = userList.size.toString() + " utilisateurs en ligne,\n" + langList.size.toString() + " dans votre langue"
+                            number2.text = str
+                            userList.clear()
+                            langList.clear()
                         }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
-
                 }
             }
         )
-        val str = userList.size.toString() + " utilisateurs en ligne."
-        number2.text = str
     }
 
+    //Affichage du message de bienvenue
     private fun showPseudo() {
-        pseudo.text = thisUser.username.toString()
+        val str = "Bonjour,\n" + thisUser.username.toString()
+        pseudo.text = str
     }
 
 }

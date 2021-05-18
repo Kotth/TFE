@@ -63,9 +63,11 @@ class MessageActivity: AppCompatActivity() {
                 val username = toUser.username
                 // Si connectedTo est un string vide --> fin de la conversation
                 if (toUid == "") {
+                    if (check) {
+                        Toast.makeText(this@MessageActivity, "Discussion terminée par $username", Toast.LENGTH_SHORT).show()
+                    }
                     check = false
                     backHome()
-                    Toast.makeText(this@MessageActivity, "Discussion terminée par $username", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -125,12 +127,15 @@ class MessageActivity: AppCompatActivity() {
 
     // Retour vers l'acceuil
     private fun backHome() {
+        val username = toUser.username
         //Suppression de tout les messages
         if(check) {
             database.getReference("/messages/$uid/$toUid").setValue(null)
             database.getReference("/messages/$toUid/$uid").setValue(null)
             database.getReference("/users/$uid").child("connectedTo").setValue("")
             database.getReference("/users/$toUid").child("connectedTo").setValue("")
+            Toast.makeText(this@MessageActivity, "Discussion avec $username terminée", Toast.LENGTH_SHORT).show()
+            check = false
         }
         //Remise de l'utilisateur online
         database.getReference("/users/$uid").child("online").setValue(true)
