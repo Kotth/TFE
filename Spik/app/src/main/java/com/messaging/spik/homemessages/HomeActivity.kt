@@ -34,10 +34,6 @@ class HomeActivity : AppCompatActivity() {
         // Vérification si l'utilisateur est connecté
         checkLogin()
 
-        loadUser()
-
-        searchOnlineUsers()
-
         // Si connecté, verifié si personne ne lance de conversation avec
         if(uid != null) {
             checkConnexion()
@@ -99,7 +95,6 @@ class HomeActivity : AppCompatActivity() {
                     users.children.forEach {
                         if (it.key == uid) {
                             thisUser = it.getValue(User::class.java)!!
-                            showPseudo()
                         }
                     }
                 }
@@ -161,8 +156,10 @@ class HomeActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         } else {
-            //Si connecté le passe online
+            //Si connecté le passe online et charge les textes
             database.getReference("/users/$uid").child("online").setValue(true)
+            loadUser()
+            searchOnlineUsers()
         }
     }
 
@@ -239,7 +236,7 @@ class HomeActivity : AppCompatActivity() {
                                     langList.add(temp)
                                 }
                             }
-                            val str = userList.size.toString() + " utilisateurs en ligne,\n" + langList.size.toString() + " dans votre langue"
+                            val str = userList.size.toString() + " utilisateurs en ligne\n" + langList.size.toString() + " dans votre langue"
                             number2.text = str
                             userList.clear()
                             langList.clear()
@@ -250,12 +247,6 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         )
-    }
-
-    //Affichage du message de bienvenue
-    private fun showPseudo() {
-        val str = "Bonjour,\n" + thisUser.username.toString()
-        pseudo.text = str
     }
 
 }

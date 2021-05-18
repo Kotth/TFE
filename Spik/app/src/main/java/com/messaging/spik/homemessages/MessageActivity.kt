@@ -37,6 +37,8 @@ class MessageActivity: AppCompatActivity() {
         reference = database.getReference("/messages/$uid/$toUid")
         recyclerviewMessage.adapter = adapter
 
+        showPseudo()
+
         // Listener de messages
         getMessage()
 
@@ -52,6 +54,10 @@ class MessageActivity: AppCompatActivity() {
         backHomeButton.setOnClickListener{
             backHome()
         }
+    }
+
+    private fun showPseudo() {
+        pseudo.text = toUser.username
     }
 
     //Fonction de vérification de la connexion entre utilisateurs
