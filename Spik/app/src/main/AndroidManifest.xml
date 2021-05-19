@@ -10,23 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Spik">
 
-        <activity android:name="com.messaging.spik.homemessages.HomeActivity">
+        <activity android:name="com.messaging.spik.homemessages.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.messaging.spik.registerlogin.LoginActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.registerlogin.RegisterActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.messaging.spik.modify.ModifyActivity"/>
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.messaging.spik.modify.ModifyActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.PasswordActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.messaging.spik.modify.LangActivity"/>
-        <activity android:name="com.messaging.spik.modify.DeleteActivity"/>
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.messaging.spik.modify.LangActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.messaging.spik.modify.DeleteActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.homemessages.MessageActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
