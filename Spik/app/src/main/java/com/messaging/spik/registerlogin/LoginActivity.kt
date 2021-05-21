@@ -37,18 +37,23 @@ class LoginActivity : AppCompatActivity() {
         val email = emailAddressConnexion.text.toString()
         val password = passwordConnexion.text.toString()
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if(!it.isSuccessful) return@addOnCompleteListener
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if(!it.isSuccessful) return@addOnCompleteListener
 
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
 
-                Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Impossible de se connecter: $it.message", Toast.LENGTH_SHORT).show()
-            }
+                    Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Impossible de se connecter: $it.message", Toast.LENGTH_SHORT).show()
+                }
+        }  else {
+            Toast.makeText(this, "Veuillez saisir des informations correctes", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

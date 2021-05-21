@@ -22,4 +22,5 @@
     <string name="entrez_votre_message">Entrez votre message</string>
     <string name="envoyer">envoyer</string>
     <string name="lancer_une_conversation">Lancer une conversation</string>
+    <string name="confirmez_mot_de_passe">Confirmez mot de passe</string>
 </resources>
