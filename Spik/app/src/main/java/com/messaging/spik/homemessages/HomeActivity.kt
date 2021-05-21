@@ -2,6 +2,7 @@ package com.messaging.spik.homemessages
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -132,6 +133,7 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Log.d("error", error.toString())
             }
         })
     }

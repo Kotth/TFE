@@ -58,7 +58,7 @@ class RegisterActivity: AppCompatActivity() {
                 Toast.makeText(this, "Erreur", Toast.LENGTH_SHORT).show()
             }
         } else {
-            if (password != confirmPassword) {
+            if (password == confirmPassword) {
                 //Création d'un nouvel utilisateur
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
