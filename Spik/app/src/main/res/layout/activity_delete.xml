@@ -62,5 +62,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="240dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/annuler"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/deleteButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/deleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

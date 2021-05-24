@@ -66,9 +66,6 @@ class RegisterActivity: AppCompatActivity() {
 
                         //Push des données de l'utilisateur dans la base de données
                         pushUserToFirebase()
-
-                        //Message si succès
-                        Toast.makeText(this, "Compte créé avec succès", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener {
                         //Message si erreur
@@ -78,7 +75,6 @@ class RegisterActivity: AppCompatActivity() {
                 //Message si erreur
                 Toast.makeText(this, "Les deux mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show()
             }
-
         }
 
     }
@@ -87,6 +83,8 @@ class RegisterActivity: AppCompatActivity() {
     private fun pushUserToFirebase() {
 
         val uid = FirebaseAuth.getInstance().uid
+
+        val u = FirebaseAuth.getInstance().currentUser
 
         //Reference vers la db
         database.getReference("/users/$uid")
@@ -103,6 +101,9 @@ class RegisterActivity: AppCompatActivity() {
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
+                    if (!u!!.isEmailVerified) {
+                        Toast.makeText(this, "Email de vérification envoyé", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 //Si la requête échoue
                 .addOnFailureListener {

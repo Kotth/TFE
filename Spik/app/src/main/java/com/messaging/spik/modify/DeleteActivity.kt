@@ -27,6 +27,10 @@ class DeleteActivity : AppCompatActivity() {
             back()
         }
 
+        cancelButton.setOnClickListener {
+            back()
+        }
+
         // Suppression du compte qi clique sur le bouton
         deleteButton.setOnClickListener {
             delete()
@@ -52,6 +56,7 @@ class DeleteActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Si réussite
                         database.getReference("/users/$uid").setValue(null)
+                        user.signOut()
                         val intent = Intent(this, LoginActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)

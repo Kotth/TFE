@@ -60,7 +60,7 @@
         android:height="70dp"
         android:backgroundTint="@color/lightBlue"
         android:text="@string/sauvegarder"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@+id/changeLangSpinner"
         app:layout_constraintHorizontal_bias="0.0"

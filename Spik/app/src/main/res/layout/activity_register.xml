@@ -141,7 +141,7 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="@string/inscription"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:backgroundTint="@color/lightBlue"
         app:cornerRadius="30dp"

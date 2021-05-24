@@ -76,7 +76,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="?attr/hintTextColor"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
         app:layout_constraintStart_toStartOf="parent" />
