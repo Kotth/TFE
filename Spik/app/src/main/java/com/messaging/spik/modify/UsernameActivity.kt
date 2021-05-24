@@ -35,12 +35,16 @@ class UsernameActivity: AppCompatActivity() {
     private fun changeUsername() {
         // Récupération du pseudo
         val username = usernameChange.text.toString()
-        // Changement de langue dans la database
-        database.getReference("/users/$uid").child("username").setValue(username)
-        Toast.makeText(this, "Pseudo modifié avec succès!", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, ModifyActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+
+        if(username.isEmpty()) {
+            Toast.makeText(this, "Veuillez indiquer un pseudo correct.", Toast.LENGTH_SHORT).show()
+        } else{
+            database.getReference("/users/$uid").child("username").setValue(username)
+            Toast.makeText(this, "Pseudo modifié avec succès!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ModifyActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     private fun returnback() {
