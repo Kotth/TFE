@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.messaging.spik.homemessages.HomeActivity
 import com.messaging.spik.R
 import com.google.firebase.auth.FirebaseAuth
+import com.messaging.spik.modify.ForgotPasswordActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -23,13 +24,15 @@ class LoginActivity : AppCompatActivity() {
         //Bouton pour ouvrir la page d'inscription
         textRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-    }
 
-    //Fonction au démarrage
-    public override fun onStart() {
-        super.onStart()
+        forgotText.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
 

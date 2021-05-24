@@ -47,11 +47,10 @@ class LangActivity: AppCompatActivity() {
         } else{
             // Changement de langue dans la database
             database.getReference("/users/$uid").child("lang").setValue(index)
-            //Renvoie vers la page de modif
+            Toast.makeText(this, "Langue modifiée avec succès!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ModifyActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Toast.makeText(this, "Langue modifiée avec succès", Toast.LENGTH_SHORT).show()
         }
     }
 

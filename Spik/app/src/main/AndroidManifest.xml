@@ -35,6 +35,12 @@
         <activity android:name="com.messaging.spik.homemessages.MessageActivity"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.messaging.spik.modify.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.messaging.spik.modify.UsernameActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"

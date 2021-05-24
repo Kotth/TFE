@@ -80,15 +80,29 @@
         android:id="@+id/textRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:text="@string/pas_encore_de_compte_inscrivez_vous"
         android:textColor="@color/lightBlue"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="@+id/connexionButton"
         app:layout_constraintStart_toStartOf="@+id/connexionButton"
-        app:layout_constraintTop_toBottomOf="@+id/connexionButton"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintTop_toBottomOf="@+id/connexionButton" />
+
+    <TextView
+        android:id="@+id/forgotText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mot_de_passe_oubli"
+        android:textColor="@color/lightBlue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="@+id/textRegister"
+        app:layout_constraintStart_toStartOf="@+id/textRegister"
+        app:layout_constraintTop_toBottomOf="@+id/textRegister"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/passwordConnexion"
