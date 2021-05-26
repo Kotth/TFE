@@ -18,28 +18,28 @@
             </intent-filter>
         </activity>
         <activity android:name="com.messaging.spik.registerlogin.LoginActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.registerlogin.RegisterActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.ModifyActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.PasswordActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.LangActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.DeleteActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.homemessages.MessageActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.ForgotPasswordActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity android:name="com.messaging.spik.modify.UsernameActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
 
         <meta-data
