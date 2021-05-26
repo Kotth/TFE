@@ -163,9 +163,7 @@ class MessageFromItem(val text: String): Item<GroupieViewHolder>() {
         viewHolder.itemView.textViewFrom.text = text
     }
 
-    override fun getLayout(): Int {
-        return R.layout.left_row
-    }
+    override fun getLayout() = R.layout.left_row
 }
 
 //Affichage des messages envoyés
@@ -174,7 +172,5 @@ class MessageToItem(val text: String): Item<GroupieViewHolder>() {
         viewHolder.itemView.textViewTo.text = text
     }
 
-    override fun getLayout(): Int {
-        return R.layout.right_row
-    }
+    override fun getLayout() = R.layout.right_row
 }
