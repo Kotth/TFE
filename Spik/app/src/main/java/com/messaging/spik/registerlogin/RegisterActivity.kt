@@ -40,6 +40,7 @@ class RegisterActivity: AppCompatActivity() {
         //Récupération de toutes les inputs pour l'inscription
         val email = emailAddressRegister.text.toString()
         val password = passwordRegister.text.toString()
+        val confirmPassword = passwordRegister2.text.toString()
         val pseudo = pseudoRegister.text.toString()
         val index = langSpinner.selectedItemPosition
 
@@ -56,23 +57,26 @@ class RegisterActivity: AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Erreur", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            if (password == confirmPassword) {
+                //Création d'un nouvel utilisateur
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if(!it.isSuccessful) return@addOnCompleteListener
+
+                        //Push des données de l'utilisateur dans la base de données
+                        pushUserToFirebase()
+                    }
+                    .addOnFailureListener {
+                        //Message si erreur
+                        Toast.makeText(this, "Erreur lors de la création du compte: $it.message", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                //Message si erreur
+                Toast.makeText(this, "Les deux mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show()
+            }
         }
 
-        //Création d'un nouvel utilisateur
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if(!it.isSuccessful) return@addOnCompleteListener
-
-                    //Push des données de l'utilisateur dans la base de données
-                    pushUserToFirebase()
-
-                    //Message si succès
-                    Toast.makeText(this, "Compte créé avec succès", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    //Message si erreur
-                    Toast.makeText(this, "Erreur lors de la création du compte: $it.message", Toast.LENGTH_SHORT).show()
-                }
     }
 
 

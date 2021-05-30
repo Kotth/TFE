@@ -2,6 +2,7 @@ package com.messaging.spik.homemessages
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -24,6 +25,8 @@ class HomeActivity : AppCompatActivity() {
     private val user = FirebaseAuth.getInstance()
     private val uid = user.uid
     private val database = FirebaseDatabase.getInstance("https://spik-app-default-rtdb.europe-west1.firebasedatabase.app/")
+    private lateinit var thisUser: User
+    private val ref = database.getReference("/users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +34,6 @@ class HomeActivity : AppCompatActivity() {
 
         // Vérification si l'utilisateur est connecté
         checkLogin()
-
 
         // Si connecté, verifié si personne ne lance de conversation avec
         if(uid != null) {
@@ -86,6 +88,24 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private fun loadUser() {
+        //Récupération des donnés de l'utilisateur local
+        ref.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key == uid) {
+                            thisUser = it.getValue(User::class.java)!!
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            }
+        )
+    }
+
     //Listener pour vérifier si on reçoit des demandes de connexion
     private fun checkConnexion() {
         database.getReference("/users/$uid").child("connectedTo").addValueEventListener(object: ValueEventListener {
@@ -113,6 +133,7 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Log.d("error", error.toString())
             }
         })
     }
@@ -137,8 +158,10 @@ class HomeActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         } else {
-            //Si connecté le passe online
+            //Si connecté le passe online et charge les textes
             database.getReference("/users/$uid").child("online").setValue(true)
+            loadUser()
+            searchOnlineUsers()
         }
     }
 
@@ -156,38 +179,14 @@ class HomeActivity : AppCompatActivity() {
 
     // Recherche d'une conversation
     private fun newMessage() {
-        //Création de la référence vers la database ainsi que la liste de users dispo
-        val ref = database.getReference("/users")
-        lateinit var thisUser: User
         var userList: MutableList<User> = mutableListOf()
-
-        //Récupération des donnés de l'utilisateur local
-        ref.addListenerForSingleValueEvent(
-            object : ValueEventListener {
-                override fun onDataChange(users: DataSnapshot) {
-                    users.children.forEach {
-                        if (it.key == uid) {
-                            thisUser = it.getValue(User::class.java)!!
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(
-                        this@HomeActivity,
-                        "Erreur veuillez réessayer",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        )
 
         // Recherche dans tout les utilisateurs des utilisateurs compatibles
         ref.addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(users: DataSnapshot) {
                     users.children.forEach {
-                        if (it.key != uid) {
+                        if (it.key != uid && it.key != "null") {
                             val temp: User? = it.getValue(User::class.java)
                             if (temp!!.online && temp.lang == thisUser.lang) {
                                 //Si utilisateur trouvé, on le met dans la liste
@@ -199,7 +198,7 @@ class HomeActivity : AppCompatActivity() {
                         // Si la liste est vide, impossible de créer une conversation
                         Toast.makeText(
                             this@HomeActivity,
-                            "Aucune utilisateur disponible",
+                            "Aucun utilisateur disponible",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
@@ -214,6 +213,38 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
 
+                override fun onCancelled(error: DatabaseError) {
+                }
+            }
+        )
+    }
+
+    //Recherche d'utilisateurs en ligne
+    private fun searchOnlineUsers() {
+        var userList: MutableList<User> = mutableListOf()
+        var langList: MutableList<User> = mutableListOf()
+
+        // Recherche dans tout les utilisateurs des utilisateurs compatibles
+        ref.addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(users: DataSnapshot) {
+                    users.children.forEach {
+                        if (it.key != uid && it.key != "null") {
+                            val temp: User? = it.getValue(User::class.java)
+                            //Si utilisateur trouvé, on le met dans la liste
+                            if (temp!!.online) {
+                                userList.add(temp)
+                                if (temp.lang == thisUser.lang) {
+                                    langList.add(temp)
+                                }
+                            }
+                            val str = userList.size.toString() + " utilisateurs en ligne\n" + langList.size.toString() + " dans votre langue"
+                            number2.text = str
+                            userList.clear()
+                            langList.clear()
+                        }
+                    }
+                }
                 override fun onCancelled(error: DatabaseError) {
                 }
             }

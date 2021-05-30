@@ -17,8 +17,15 @@
     <string name="sauvegarder">Sauvegarder</string>
     <string name="modifier_la_langue">Modifier la langue</string>
     <string name="modifier_le_mot_de_passe">Modifier le <br/> mot de passe</string>
-    <string name="confirmer_le_mot_de_passe">Confirmer le mot de passe</string>
-    <string name="etes_vous_vraiment_s_r_de_vouloir_supprimer_votre_compte">Etes-vous vraiment sûr de vouloir <br/> supprimer votre compte ?</string>
+    <string name="etes_vous_vraiment_s_r_de_vouloir_supprimer_votre_compte">Etes-vous vraiment sûr de vouloir <br/> supprimer votre compte ? <br/> Vous perdrez toutes vos données.</string>
     <string name="entrez_votre_message">Entrez votre message</string>
     <string name="envoyer">envoyer</string>
+    <string name="lancer_une_conversation">Lancer une conversation</string>
+    <string name="confirmez_le_mot_de_passe">Confirmez le mot de passe</string>
+    <string name="annuler">Annuler</string>
+    <string name="mot_de_passe_oubli">Mot de passe oublié?</string>
+    <string name="r_initialiser_le_mot_de_passe">Réinitialiser <br/> le mot de passe</string>
+    <string name="nouveau_mot_de_passe">Nouveau mot de passe</string>
+    <string name="nouveau_pseudo">Nouveau pseudo</string>
+    <string name="modifier_son_pseudo">Modifier son pseudo</string>
 </resources>

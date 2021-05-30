@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 //Class d'objet User pour les utilisateurs
 @Parcelize
-class User(val uid: String?, val username: String?, val lang: Int?, val online: Boolean, val connectedTo: String): Parcelable {
+data class User(val uid: String?, val username: String?, val lang: Int?, val online: Boolean, val connectedTo: String): Parcelable {
     constructor() : this("","", 0, false, "")
 }

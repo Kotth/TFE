@@ -12,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:openDrawer="start">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/toolbar"
@@ -38,25 +40,54 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/baseline_menu_white_24" />
+                    app:srcCompat="@drawable/baseline_menu_white_20"
+                    android:shadowColor="@color/grey"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="3"/>
 
             </com.google.android.material.appbar.AppBarLayout>
 
             <!-- Screen content -->
-            <FrameLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activity_main_frame_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient" />
+                android:background="@drawable/gradient">
 
-            <ImageButton
-                android:id="@+id/plusButton"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:background="@drawable/button_border"
+                <Button
+                    android:id="@+id/plusButton"
+                    android:layout_width="200dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="150dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/lancer_une_conversation"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="30dp"
+                    app:icon="@drawable/outline_add_white_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/number2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="196dp"
+                android:background="@drawable/round_text"
+                android:fontFamily="@font/roboto"
+                android:padding="12dp"
+                android:textAlignment="center"
+                android:textColor="@color/grey"
+                android:textSize="24sp"
                 app:layout_anchor="@+id/activity_main_frame_layout"
-                app:layout_anchorGravity="center"
-                app:srcCompat="@drawable/outline_add_white_48" />
+                app:layout_anchorGravity="center" />
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

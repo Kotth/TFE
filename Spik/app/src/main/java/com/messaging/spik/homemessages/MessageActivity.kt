@@ -37,6 +37,8 @@ class MessageActivity: AppCompatActivity() {
         reference = database.getReference("/messages/$uid/$toUid")
         recyclerviewMessage.adapter = adapter
 
+        showPseudo()
+
         // Listener de messages
         getMessage()
 
@@ -54,6 +56,10 @@ class MessageActivity: AppCompatActivity() {
         }
     }
 
+    private fun showPseudo() {
+        pseudo.text = toUser.username
+    }
+
     //Fonction de vérification de la connexion entre utilisateurs
     private fun checkConnexion() {
         //listener sur l'user connecté
@@ -63,9 +69,11 @@ class MessageActivity: AppCompatActivity() {
                 val username = toUser.username
                 // Si connectedTo est un string vide --> fin de la conversation
                 if (toUid == "") {
+                    if (check) {
+                        Toast.makeText(this@MessageActivity, "Discussion terminée par $username", Toast.LENGTH_SHORT).show()
+                    }
                     check = false
                     backHome()
-                    Toast.makeText(this@MessageActivity, "Discussion terminée par $username", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -125,12 +133,15 @@ class MessageActivity: AppCompatActivity() {
 
     // Retour vers l'acceuil
     private fun backHome() {
+        val username = toUser.username
         //Suppression de tout les messages
         if(check) {
             database.getReference("/messages/$uid/$toUid").setValue(null)
             database.getReference("/messages/$toUid/$uid").setValue(null)
             database.getReference("/users/$uid").child("connectedTo").setValue("")
             database.getReference("/users/$toUid").child("connectedTo").setValue("")
+            Toast.makeText(this@MessageActivity, "Discussion avec $username terminée", Toast.LENGTH_SHORT).show()
+            check = false
         }
         //Remise de l'utilisateur online
         database.getReference("/users/$uid").child("online").setValue(true)
@@ -152,9 +163,7 @@ class MessageFromItem(val text: String): Item<GroupieViewHolder>() {
         viewHolder.itemView.textViewFrom.text = text
     }
 
-    override fun getLayout(): Int {
-        return R.layout.left_row
-    }
+    override fun getLayout() = R.layout.left_row
 }
 
 //Affichage des messages envoyés
@@ -163,7 +172,5 @@ class MessageToItem(val text: String): Item<GroupieViewHolder>() {
         viewHolder.itemView.textViewTo.text = text
     }
 
-    override fun getLayout(): Int {
-        return R.layout.right_row
-    }
+    override fun getLayout() = R.layout.right_row
 }

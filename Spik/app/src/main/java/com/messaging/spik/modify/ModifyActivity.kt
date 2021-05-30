@@ -27,11 +27,21 @@ class ModifyActivity: AppCompatActivity() {
         langButton.setOnClickListener {
             modifyLang()
         }
+
+        usernameButton.setOnClickListener {
+            editUsername()
+        }
     }
 
     //Fonction pour changer l'action lorqu'on appuie sur la touche Back du menu de navigation
     override fun onBackPressed() {
         returnToHome()
+    }
+
+    private fun editUsername() {
+        val intent = Intent(this, UsernameActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     private fun returnToHome() {
